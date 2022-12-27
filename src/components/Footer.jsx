@@ -4,7 +4,7 @@ import { BsFacebook, BsInstagram } from "react-icons/bs";
 
 const Footer = () => {
   return (
-    <div className="font-jost bg-[#121921] fixed bottom-0 w-full text-white flex flex-row p-12 items-center justify-between text-sm">
+    <div className="font-jost bg-[#121921] w-full text-white flex flex-row p-12 items-center justify-between text-sm fixed bottom-0">
       <div className="flex flex-col">
         <p className="text-lg">Menu Links</p>
         <Link to="/">Home</Link>
