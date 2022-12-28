@@ -14,7 +14,6 @@ const Categories = ({ row }) => {
   useEffect(() => {
     fetchCategories();
   }, []);
-  console.log(categories);
   return (
     <div className="flex flex-row items-center my-10">
       {categories.map((category, index) => (

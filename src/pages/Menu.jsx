@@ -6,21 +6,21 @@ import Product from "../components/Product";
 const Menu = () => {
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
-  const [backup,setBackup] = useState([
-    {
-      id:1,
-      productName: "Meatpie",
-      price: 700,
-      image: "/easyappz.png"
-    },
-    {
-      id:2,
-      productName: "Chickenpie",
-      price: 400,
-      image: "/easyappz.png"
-    },
+  // const [backup,setBackup] = useState([
+  //   {
+  //     id:1,
+  //     productName: "Meatpie",
+  //     price: 700,
+  //     image: "/easyappz.png"
+  //   },
+  //   {
+  //     id:2,
+  //     productName: "Chickenpie",
+  //     price: 400,
+  //     image: "/easyappz.png"
+  //   },
 
-  ])
+  // ])
 
   const fetchProducts = () => {
     const productsRef = databaseRef(database, "products/");

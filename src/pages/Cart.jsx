@@ -1,9 +1,10 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { cartContext } from "../App";
 import CartItem from "../components/CartItem";
 import { useNavigate } from "react-router-dom";
 import Modal from "../components/Modal";
 import { PaystackButton } from "react-paystack";
+import axios from "axios";
 
 const Cart = () => {
   const { cart } = useContext(cartContext);
@@ -13,6 +14,7 @@ const Cart = () => {
     0
   );
 
+  const cartItems = cart.map((item) => item.productName);
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [email, setEmail] = useState("");
@@ -21,6 +23,39 @@ const Cart = () => {
   const publicKey = "pk_test_e0e9ea49a1fe47fb05f9f960a0341eaf4bd86a4e";
   // const amount = 1000000
   const amount = totalPrice * 100;
+
+  const sendMail = () => {
+    const options = {
+      method: "POST",
+      url: "https://email-sender1.p.rapidapi.com/",
+      params: {
+        txt_msg: `This is to confirm your order. `,
+        to: `${email}`,
+        // to: "ezembachiamaka@gmail.com",
+        from: "Eazyapps",
+        subject: "Order Confirmation",
+        // bcc: "webdev@trostechnologies.com",
+        reply_to: "webdev@trostechnologies.com",
+        html_msg: `<html><body><b>Dear ${name}</b>, <br/> <br/>This is to confirm your order for ${cartItems} <br/> Your order will be ready in a couple of minutes and will be delivered to you. Best Regards <br/> <br/><b>EazyApps</b></body></html>`,
+        cc: "webdev@trostechnologies.com",
+      },
+      headers: {
+        "content-type": "application/json",
+        "x-rapidapi-host": "email-sender1.p.rapidapi.com",
+        "x-rapidapi-key": "041695ddc2msh03ecff701bdb863p15a99ejsnfcf96e24fbff",
+      },
+      data: { key1: "value", key2: "value" },
+    };
+
+    axios
+      .request(options)
+      .then(function (response) {
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
+  };
 
   const componentProps = {
     email,
@@ -31,8 +66,11 @@ const Cart = () => {
     },
     publicKey,
     text: "Pay Now",
-    onSuccess: () =>
-      alert("Thanks for doing business with us! Come back soon!!"),
+    onSuccess: () => {
+      alert("Thanks for doing business with us! Come back soon!!");
+      sendMail();
+      setShowModal(false);
+    },
     onClose: () => alert("Wait! You need this food, don't go!!!!"),
   };
   return (
@@ -127,3 +165,6 @@ const Cart = () => {
 };
 
 export default Cart;
+
+ //  This is to confirm your booking for ${bookedDate}, for our ${sessionTime} session, below are your booking details - ${booking_info}
+  //${bookedDate}, for our ${sessionTime} session, below are your booking details - <ul><li>Name - ${fullName}</li> <li>Email Address - ${email} </li> <li>Phone Number - ${phone}</li> <li>Service - ${service}</li><li>Spaces booked for- ${numberOfPeople}</li></ul> <br/>
