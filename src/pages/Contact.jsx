@@ -4,7 +4,7 @@ const Contact = () => {
       <h2 className="font-jost text-2xl text-center mt-6 font-semibold">
         Contact Us
       </h2>
-      <form className="w-[65%] mx-auto p-4 my-auto font-jost">
+      <form className="w-[80%] mx-auto p-4 my-auto font-jost">
         <div className="w-full p-4">
           <label className="text-lg">Name</label>
           <input

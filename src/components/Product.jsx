@@ -16,7 +16,7 @@ const Product = ({ item }) => {
   };
 
   return (
-    <div className="w-[400px] h-[300px] font-jost shadow-md rounded-b-md">
+    <div className="min-w-[325px] w-[325px] h-[300px] md:w-[400px] lg:w-[400px] font-jost shadow-md rounded-b-md my-1.5">
       <img
         src={item?.image}
         alt={item?.productName}

@@ -44,7 +44,7 @@ const Menu = () => {
   }, []);
   // console.log(products);
   return (
-    <div className="w-[85%] h-full mx-auto pt-4.5">
+    <div className="w-[90%] h-full mx-auto pt-4.5">
       <div className="w-[90%] mx-auto">
         <p className="font-jost text-base font-semibold my-3">Filters</p>
         <div className="flex flex-row items-center w-full justify-between">
@@ -62,7 +62,7 @@ const Menu = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-row items-center justify-between mt-5 flex-wrap">
+      <div className="flex flex-row justify-between my-5 flex-wrap w-full overflow-y-auto h-[88%]">
         {products.map((product) => (
           <Product key={product.id} item={product} />
         ))}

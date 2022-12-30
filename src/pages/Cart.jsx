@@ -80,7 +80,7 @@ const Cart = () => {
         <p className="font-jost text-xl text-center">Your cart is empty</p>
       ) : (
         <div>
-          <div className="flex flex-row w-full mx-auto items-center justify-between text-lg">
+          <div className="flex flex-row w-full mx-auto items-center justify-between text-sm lg:text-lg md:text-lg">
             <p>Image</p>
             <p>Product name</p>
             <p>Quantity</p>
@@ -92,7 +92,7 @@ const Cart = () => {
             <CartItem
               item={item}
               key={item.id}
-              imageSize="w-[150px]"
+              imageSize="w-[70px] lg:w-[150px] md:w-[120px]"
               textSize="text-base"
               showUnitPrice={true}
             />
@@ -101,8 +101,8 @@ const Cart = () => {
       )}
 
       {cart.length !== 0 && (
-        <div className="border w-[22%] ml-auto p-2 mt-6">
-          <p className="text-center text-lg">Total price: {totalPrice}</p>
+        <div className="border lg:w-[22%] w-[50%] ml-auto p-2 mt-6">
+          <p className="text-center text-sm lg:text-lg md:text-lg">Total price: {totalPrice}</p>
         </div>
       )}
       <div className="w-[85%] mx-auto flex flex-row items-center justify-between mt-20">
@@ -123,7 +123,7 @@ const Cart = () => {
       </div>
       {showModal && (
         <Modal closeFunc={setShowModal}>
-          <form className="w-[65%] mx-auto p-4 my-auto">
+          <form className="lg:w-[65%] md:w-[75%] mx-auto p-4 my-auto">
             <div className="w-full p-4">
               <label className="text-lg">Name</label>
               <input

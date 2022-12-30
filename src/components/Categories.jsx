@@ -15,7 +15,7 @@ const Categories = ({ row }) => {
     fetchCategories();
   }, []);
   return (
-    <div className="flex flex-row items-center my-10">
+    <div className="flex flex-row items-center my-10 overflow-x-auto">
       {categories.map((category, index) => (
         <Category
           key={index}
