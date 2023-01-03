@@ -1,9 +1,9 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext } from "react";
 import { cartContext } from "../App";
 import CartItem from "../components/CartItem";
 import { useNavigate } from "react-router-dom";
-import Modal from "../components/Modal";
-import { PaystackButton } from "react-paystack";
+// import Modal from "../components/Modal";
+// import { PaystackButton } from "react-paystack";
 import axios from "axios";
 
 const Cart = () => {
@@ -16,13 +16,6 @@ const Cart = () => {
 
   const cartItems = cart.map((item) => item.productName);
   const navigate = useNavigate();
-  const [showModal, setShowModal] = useState(false);
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const publicKey = "pk_test_e0e9ea49a1fe47fb05f9f960a0341eaf4bd86a4e";
-  // const amount = 1000000
-  const amount = totalPrice * 100;
 
   const sendMail = () => {
     const options = {
@@ -36,7 +29,16 @@ const Cart = () => {
         subject: "Order Confirmation",
         // bcc: "webdev@trostechnologies.com",
         reply_to: "webdev@trostechnologies.com",
-        html_msg: `<html><body><b>Dear ${name}</b>, <br/> <br/>This is to confirm your order for ${cartItems} <br/> Your order will be ready in a couple of minutes and will be delivered to you. Best Regards <br/> <br/><b>EazyApps</b></body></html>`,
+        html_msg: `<html><body><b>Dear ${name}</b>, <br/> <br/>This is to confirm your order for ${cart.map(
+          (item) => (
+            <li>
+              <div>
+                {item.productName}
+                {item.quantity}
+              </div>
+            </li>
+          )
+        )} <br/> Your order will be ready in a couple of minutes and will be delivered to you. Best Regards <br/> <br/><b>EazyApps</b></body></html>`,
         cc: "webdev@trostechnologies.com",
       },
       headers: {
@@ -57,22 +59,6 @@ const Cart = () => {
       });
   };
 
-  const componentProps = {
-    email,
-    amount,
-    metadata: {
-      name,
-      phone,
-    },
-    publicKey,
-    text: "Pay Now",
-    onSuccess: () => {
-      alert("Thanks for doing business with us! Come back soon!!");
-      sendMail();
-      setShowModal(false);
-    },
-    onClose: () => alert("Wait! You need this food, don't go!!!!"),
-  };
   return (
     <div className="w-[88%] mx-auto mt-10 font-jost">
       <p className="text-2xl text-center mb-3">Shopping Cart</p>
@@ -102,7 +88,9 @@ const Cart = () => {
 
       {cart.length !== 0 && (
         <div className="border lg:w-[22%] w-[50%] ml-auto p-2 mt-6">
-          <p className="text-center text-sm lg:text-lg md:text-lg">Total price: {totalPrice}</p>
+          <p className="text-center text-sm lg:text-lg md:text-lg">
+            Total price: {totalPrice}
+          </p>
         </div>
       )}
       <div className="w-[85%] mx-auto flex flex-row items-center justify-between mt-20">
@@ -115,13 +103,51 @@ const Cart = () => {
         {cart.length !== 0 && (
           <button
             className="bg-black text-white py-2 px-4 rounded-full cursor-pointer"
-            onClick={() => setShowModal(true)}
+            onClick={() => navigate("/checkout")}
           >
             Checkout
           </button>
         )}
       </div>
-      {showModal && (
+    </div>
+  );
+};
+
+export default Cart;
+
+//  This is to confirm your booking for ${bookedDate}, for our ${sessionTime} session, below are your booking details - ${booking_info}
+//${bookedDate}, for our ${sessionTime} session, below are your booking details - <ul><li>Name - ${fullName}</li> <li>Email Address - ${email} </li> <li>Phone Number - ${phone}</li> <li>Service - ${service}</li><li>Spaces booked for- ${numberOfPeople}</li></ul> <br/>
+
+// const [showModal, setShowModal] = useState(false);
+// const [email, setEmail] = useState("");
+// const [name, setName] = useState("");
+// const [phone, setPhone] = useState("");
+// const [address, setAddress] = useState("");
+// const publicKey = "pk_test_e0e9ea49a1fe47fb05f9f960a0341eaf4bd86a4e";
+// const amount = 1000000
+// const amount = totalPrice * 100;
+// const [deliveryOption, setDeliveryOption] = useState(true);
+// const delivery = ["Pay Online", "Pay with Cash"];
+
+// const componentProps = {
+//   email,
+//   amount,
+//   metadata: {
+//     name,
+//     phone,
+//   },
+//   publicKey,
+//   text: "Pay Now",
+//   onSuccess: () => {
+//     alert("Thanks for doing business with us! Come back soon!!");
+//     sendMail();
+//     setShowModal(false);
+//   },
+//   onClose: () => alert("Wait! You need this food, don't go!!!!"),
+// };
+
+{
+  /* {showModal && (
         <Modal closeFunc={setShowModal}>
           <form className="lg:w-[65%] md:w-[75%] mx-auto p-4 my-auto">
             <div className="w-full p-4">
@@ -151,6 +177,13 @@ const Cart = () => {
                 className="w-full p-2.5 rounded-xl"
               />
             </div>
+            <div className="w-full p-4 ">
+              <label className="text-lg">Address</label>
+              <textarea
+                className="w-full h-[125px] rounded-xl"
+                onChange={(e) => setAddress(e.target.value)}
+              ></textarea>
+            </div>
           </form>
           <div className="w-[63%] p-6 mx-auto">
             <PaystackButton
@@ -159,12 +192,18 @@ const Cart = () => {
             />
           </div>
         </Modal>
-      )}
-    </div>
-  );
-};
-
-export default Cart;
-
- //  This is to confirm your booking for ${bookedDate}, for our ${sessionTime} session, below are your booking details - ${booking_info}
-  //${bookedDate}, for our ${sessionTime} session, below are your booking details - <ul><li>Name - ${fullName}</li> <li>Email Address - ${email} </li> <li>Phone Number - ${phone}</li> <li>Service - ${service}</li><li>Spaces booked for- ${numberOfPeople}</li></ul> <br/>
+      )} */
+}
+{
+  /* {deliveryOption && (
+        <Modal closeFunc={setDeliveryOption}>
+          <form>
+            <select>
+              {delivery.map((item, index) => (
+                <option key={index} value={item}>{item}</option>
+              ))}
+            </select>
+          </form>
+        </Modal>
+      )} */
+}

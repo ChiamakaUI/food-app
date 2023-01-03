@@ -7,6 +7,7 @@ import { useState, createContext } from "react";
 import Cart from "./pages/Cart";
 import Faq from "./pages/Faq";
 import Footer from "./components/Footer";
+import Checkout from "./pages/Checkout";
 
 export const cartContext = createContext();
 
@@ -24,6 +25,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/faq" element={<Faq />} />    
             <Route path="/cart" element={<Cart/>} />
+            <Route path="/checkout" element={<Checkout/>} />
           </Routes>
           <Footer/>
         </div>
