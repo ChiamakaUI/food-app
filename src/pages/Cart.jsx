@@ -4,7 +4,7 @@ import CartItem from "../components/CartItem";
 import { useNavigate } from "react-router-dom";
 // import Modal from "../components/Modal";
 // import { PaystackButton } from "react-paystack";
-import axios from "axios";
+// import axios from "axios";
 
 const Cart = () => {
   const { cart } = useContext(cartContext);
@@ -14,50 +14,8 @@ const Cart = () => {
     0
   );
 
-  const cartItems = cart.map((item) => item.productName);
+  
   const navigate = useNavigate();
-
-  const sendMail = () => {
-    const options = {
-      method: "POST",
-      url: "https://email-sender1.p.rapidapi.com/",
-      params: {
-        txt_msg: `This is to confirm your order. `,
-        to: `${email}`,
-        // to: "ezembachiamaka@gmail.com",
-        from: "Eazyapps",
-        subject: "Order Confirmation",
-        // bcc: "webdev@trostechnologies.com",
-        reply_to: "webdev@trostechnologies.com",
-        html_msg: `<html><body><b>Dear ${name}</b>, <br/> <br/>This is to confirm your order for ${cart.map(
-          (item) => (
-            <li>
-              <div>
-                {item.productName}
-                {item.quantity}
-              </div>
-            </li>
-          )
-        )} <br/> Your order will be ready in a couple of minutes and will be delivered to you. Best Regards <br/> <br/><b>EazyApps</b></body></html>`,
-        cc: "webdev@trostechnologies.com",
-      },
-      headers: {
-        "content-type": "application/json",
-        "x-rapidapi-host": "email-sender1.p.rapidapi.com",
-        "x-rapidapi-key": "041695ddc2msh03ecff701bdb863p15a99ejsnfcf96e24fbff",
-      },
-      data: { key1: "value", key2: "value" },
-    };
-
-    axios
-      .request(options)
-      .then(function (response) {
-        console.log(response.data);
-      })
-      .catch(function (error) {
-        console.error(error);
-      });
-  };
 
   return (
     <div className="w-[88%] mx-auto mt-10 font-jost">
