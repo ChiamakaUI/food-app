@@ -1,12 +1,11 @@
 import { BsWallet2, BsCreditCard } from "react-icons/bs";
 import DeliveryMethod from "../components/DeliveryMethod";
-import { useContext, useState } from "react";
+import { useContext, useState, useRef } from "react";
 import { cartContext } from "../App";
 import Modal from "../components/Modal";
 import { PaystackButton } from "react-paystack";
-// import { useForm } from "react-hook-form";
-// import { yupResolver } from "@hookform/resolvers/yup";
-// import * as yup from "yup";
+import emailjs from "@emailjs/browser";
+
 
 const Checkout = () => {
   const { cart } = useContext(cartContext);
@@ -59,6 +58,34 @@ const Checkout = () => {
   const openPickupModal = () => {
     setPickupModal(true);
   };
+  const templateParams = {
+    to_name: name,
+    customer_email: email,
+    address: address,
+    cartItemName: cartItemName,
+    cartItemPrice: cartItemPrice,
+    cartItemQuantity: cartItemQuantity,
+    phone: phone,
+    from_name: "Eazyapps Food",
+  };
+  const sendMail = () => {
+    emailjs
+      .send(
+        "service_sny2dhg",
+        "template_vczyi4d",
+        templateParams,
+        "GmW65hOSBaoMJpUae"
+      )
+      .then(
+        function (response) {
+          console.log("SUCCESS!", response.status, response.text);
+          setOnlineModal(false);
+        },
+        function (error) {
+          console.log("FAILED...", error);
+        }
+      );
+  };
   const componentProps = {
     email,
     amount,
@@ -70,18 +97,60 @@ const Checkout = () => {
     text: "Pay Now",
     onSuccess: () => {
       alert("Thanks for doing business with us! Come back soon!!");
-      setOnlineModal(false);
-      // sendMail();
+      // setOnlineModal(false);
+      sendMail();
     },
     onClose: () => alert("Wait! You need this food, don't go!!!!"),
   };
 
-  const sendDeliveryMail = () => {
-    console.log("sendDeliveryMail");
+  const sendDeliveryMail = (e) => {
+    e.preventDefault();
+    emailjs
+      .send(
+        "service_sny2dhg",
+        "template_vczyi4d",
+        templateParams,
+        "GmW65hOSBaoMJpUae"
+      )
+      .then(
+        function (response) {
+          console.log("SUCCESS!", response.status, response.text);
+          setDeliveryModal(false);
+        },
+        function (error) {
+          console.log("FAILED...", error);
+        }
+      );
   };
 
-  const sendPickupMail = () => {
-    console.log("sendPickupMail");
+  const sendPickupMail = (e) => {
+    e.preventDefault();
+
+    const templateVariables = {
+      phone: phone,
+      from_name: "Eazyapps Food",
+      cartItemName: cartItemName,
+      cartItemPrice: cartItemPrice,
+      cartItemQuantity: cartItemQuantity,
+      to_name: name,
+      customer_email: email,
+    };
+    emailjs
+      .send(
+        "service_sny2dhg",
+        "template_lezjxx8",
+        templateVariables,
+        "GmW65hOSBaoMJpUae"
+      )
+      .then(
+        function (response) {
+          console.log("SUCCESS!", response.status, response.text);
+          setPickupModal(false);
+        },
+        function (error) {
+          console.log("FAILED...", error);
+        }
+      );
   };
 
   return (
@@ -251,59 +320,3 @@ const Checkout = () => {
 };
 
 export default Checkout;
-
-//   const schema = yup
-//   .object({
-//     email: yup.string().email().required("Email is required"),
-//     password: yup.string().min(6).max(15).required(),
-//   })
-//   .required();
-
-// ${cart.map(
-//   (item) => (
-//     <li>
-//       <div>
-//         {item.productName}
-//         {item.quantity}
-//       </div>
-//     </li>
-//   )
-// )}
-
-// const sendMail = () => {
-//   const options = {
-//     method: "POST",
-//     url: "https://email-sender1.p.rapidapi.com/",
-//     params: {
-//       txt_msg: `This is to confirm your order. `,
-//       to: `${email}`,
-//       // to: "ezembachiamaka@gmail.com",
-//       from: "Eazyapps",
-//       subject: "Order Confirmation",
-//       // bcc: "webdev@trostechnologies.com",
-//       reply_to: "webdev@trostechnologies.com",
-//       html_msg: `<html><body><b>Dear ${name}</b>, <br/> <br/>This is to confirm your order for <table>
-//       <tr>${cartItemName}</tr>
-//       <tr>${cartItemPrice}</tr>
-//       <tr>${cartItemQuantity}</tr>
-//       </table>
-//        <br/> Your order will be ready in a couple of minutes and will be delivered to you at ${address}. Best Regards <br/> <br/><b>EazyApps</b></body></html>`,
-//       cc: "webdev@trostechnologies.com",
-//     },
-//     headers: {
-//       "content-type": "application/json",
-//       "x-rapidapi-host": "email-sender1.p.rapidapi.com",
-//       "x-rapidapi-key": "041695ddc2msh03ecff701bdb863p15a99ejsnfcf96e24fbff",
-//     },
-//     data: { key1: "value", key2: "value" },
-//   };
-
-//   axios
-//     .request(options)
-//     .then(function (response) {
-//       console.log(response.data);
-//     })
-//     .catch(function (error) {
-//       console.error(error);
-//     });
-// };
