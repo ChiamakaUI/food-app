@@ -5,7 +5,7 @@ import { BsFacebook, BsInstagram } from "react-icons/bs";
 const Footer = () => {
   // items-center lg:flex-col md:flex-col
   return (
-    <div className="font-jost bg-[#121921] w-full text-white flex flex-row flex-wrap items-center p-12 justify-between text-sm mt-12">
+    <div className="font-jost bg-[#121921] w-full text-white flex flex-row flex-wrap items-center p-12 justify-between text-sm mt-12 ">
       <div className="flex flex-col my-2">
         <p className="text-lg mb-1.5">Menu Links</p>
         <Link to="/">Home</Link>
@@ -35,3 +35,4 @@ const Footer = () => {
 };
 //fixed bottom-0
 export default Footer;
+//absolute bottom-0

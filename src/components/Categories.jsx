@@ -15,7 +15,7 @@ const Categories = ({ row }) => {
     fetchCategories();
   }, []);
   return (
-    <div className="flex flex-row items-center my-10 overflow-x-auto">
+    <div className="flex flex-row items-center my-10 overflow-x-auto scroll-smooth scrollbar-hide">
       {categories.map((category, index) => (
         <Category
           key={index}
@@ -28,3 +28,4 @@ const Categories = ({ row }) => {
 };
 
 export default Categories;
+//w-full 

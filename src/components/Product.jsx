@@ -1,18 +1,23 @@
 import { BsCart3 } from "react-icons/bs";
 import { useContext } from "react";
 import { cartContext } from "../App";
+import toast, { Toaster } from 'react-hot-toast';
+
 const Product = ({ item }) => {
   const { cart, setCart } = useContext(cartContext);
   const addToCart = (item) => {
+    // console.log(item);
     for (let i = 0; i < cart.length; i++) {
       const element = cart[i];
       if (element.id === item.id) {
         element.quantity++;
+        toast.error(`${item?.productName} has already been added to your cart.`);
         return;
       }
     }
 
     setCart((prev) => [...prev, { ...item, quantity: 1 }]);
+    toast.success(`Success, you have added ${item?.productName} to your cart.`);
   };
 
   return (
@@ -31,6 +36,7 @@ const Product = ({ item }) => {
           className="text-3xl cursor-pointer"
           onClick={() => addToCart(item)}
         />
+        <Toaster position="top-right" reverseOrder={false} />
       </div>
     </div>
   );

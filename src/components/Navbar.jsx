@@ -11,13 +11,14 @@ const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
   return (
-    <div className="bg-white border-b p-5 w-screen">
+    <div className="bg-white border-b p-5 w-screen max-w-screen-2xl">
       <div className="w-5/6 mx-auto hidden lg:flex md:flex flex-row items-center justify-between font-jost font-medium text-base">
         <Link to="/">
           <img src="/easyappz.png" className="h-[40px]" />
         </Link>
+        <Link to="/about">About</Link>
         <Link to="/menu">Menu</Link>
-        <Link to="/faq">FAQ</Link>
+    
         <Link to="/contact">Contact us</Link>
         <div className="relative">
           <div>
@@ -147,6 +148,14 @@ const Navbar = () => {
             </p>
             <p
               onClick={() => {
+                navigate("/about");
+                setShowMenu(false);
+              }}
+            >
+              About
+            </p>
+            <p
+              onClick={() => {
                 navigate("/menu");
                 setShowMenu(false);
               }}
@@ -154,14 +163,7 @@ const Navbar = () => {
               Menu
             </p>
 
-            <p
-              onClick={() => {
-                navigate("/faq");
-                setShowMenu(false);
-              }}
-            >
-              FAQ
-            </p>
+            
             {/* <p
               onClick={() => {
                 navigate("/cart");

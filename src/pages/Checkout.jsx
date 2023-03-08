@@ -1,6 +1,6 @@
 import { BsWallet2, BsCreditCard } from "react-icons/bs";
 import DeliveryMethod from "../components/DeliveryMethod";
-import { useContext, useState, useRef } from "react";
+import { useContext, useState } from "react";
 import { cartContext } from "../App";
 import Modal from "../components/Modal";
 import { PaystackButton } from "react-paystack";

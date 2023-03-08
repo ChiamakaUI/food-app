@@ -1,6 +1,8 @@
+import MainLayout from "../layouts/MainLayout";
 const Contact = () => {
   return (
-    <div>
+    <MainLayout>
+<div>
       <h2 className="font-jost text-2xl text-center mt-6 font-semibold">
         Contact Us
       </h2>
@@ -29,6 +31,8 @@ const Contact = () => {
         </div>
       </form>
     </div>
+    </MainLayout>
+    
   );
 };
 

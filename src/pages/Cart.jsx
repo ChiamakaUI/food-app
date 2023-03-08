@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 // import Modal from "../components/Modal";
 // import { PaystackButton } from "react-paystack";
 // import axios from "axios";
+import MainLayout from "../layouts/MainLayout";
 
 const Cart = () => {
   const { cart } = useContext(cartContext);
@@ -14,60 +15,61 @@ const Cart = () => {
     0
   );
 
-  
   const navigate = useNavigate();
 
   return (
-    <div className="w-[88%] mx-auto mt-10 font-jost">
-      <p className="text-2xl text-center mb-3">Shopping Cart</p>
-      {cart.length === 0 ? (
-        <p className="font-jost text-xl text-center">Your cart is empty</p>
-      ) : (
-        <div>
-          <div className="flex flex-row w-full mx-auto items-center justify-between text-sm lg:text-lg md:text-lg">
-            <p>Image</p>
-            <p>Product name</p>
-            <p>Quantity</p>
-            <p> Unit Price</p>
-            <p>SubTotal</p>
-            <p></p>
+    <MainLayout>
+      <div className="w-[88%] mx-auto mt-10 font-jost">
+        <p className="text-2xl text-center mb-3">Shopping Cart</p>
+        {cart.length === 0 ? (
+          <p className="font-jost text-xl text-center">Your cart is empty</p>
+        ) : (
+          <div>
+            <div className="flex flex-row w-full mx-auto items-center justify-between text-sm lg:text-lg md:text-lg">
+              <p>Image</p>
+              <p>Product name</p>
+              <p>Quantity</p>
+              <p> Unit Price</p>
+              <p>SubTotal</p>
+              <p></p>
+            </div>
+            {cart.map((item) => (
+              <CartItem
+                item={item}
+                key={item.id}
+                imageSize="w-[70px] h-[52px] lg:h-[92px] lg:w-[150px] md:w-[120px]"
+                textSize="text-base"
+                showUnitPrice={true}
+              />
+            ))}
           </div>
-          {cart.map((item) => (
-            <CartItem
-              item={item}
-              key={item.id}
-              imageSize="w-[70px] lg:w-[150px] md:w-[120px]"
-              textSize="text-base"
-              showUnitPrice={true}
-            />
-          ))}
-        </div>
-      )}
-
-      {cart.length !== 0 && (
-        <div className="border lg:w-[22%] w-[50%] ml-auto p-2 mt-6">
-          <p className="text-center text-sm lg:text-lg md:text-lg">
-            Total price: {totalPrice}
-          </p>
-        </div>
-      )}
-      <div className="w-[85%] mx-auto flex flex-row items-center justify-between mt-20">
-        <button
-          className="bg-[#FFC163] py-3 px-3.5 rounded-full cursor-pointer"
-          onClick={() => navigate("/menu")}
-        >
-          Continue Shopping
-        </button>
-        {cart.length !== 0 && (
-          <button
-            className="bg-black text-white py-2 px-4 rounded-full cursor-pointer"
-            onClick={() => navigate("/checkout")}
-          >
-            Checkout
-          </button>
         )}
+
+        {cart.length !== 0 && (
+          <div className="border lg:w-[22%] w-[50%] ml-auto p-2 mt-6">
+            <p className="text-center text-sm lg:text-lg md:text-lg">
+              Total price: {totalPrice}
+            </p>
+          </div>
+        )}
+        <div className="w-[85%] mx-auto flex flex-row items-center justify-between mt-20">
+          <button
+            className="bg-[#FFC163] py-3 px-3.5 rounded-full cursor-pointer"
+            onClick={() => navigate("/menu")}
+          >
+            Continue Shopping
+          </button>
+          {cart.length !== 0 && (
+            <button
+              className="bg-black text-white py-2 px-4 rounded-full cursor-pointer"
+              onClick={() => navigate("/checkout")}
+            >
+              Checkout
+            </button>
+          )}
+        </div>
       </div>
-    </div>
+    </MainLayout>
   );
 };
 

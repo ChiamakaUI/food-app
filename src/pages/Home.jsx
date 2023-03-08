@@ -1,13 +1,16 @@
 import Banner from "../components/Banner";
 import Categories from "../components/Categories";
 import { Link } from "react-router-dom";
+import MainLayout from "../layouts/MainLayout";
+import Showcase from "../components/Showcase";
 
 
 const Home = () => {
   return (
-    <div className="">
+    <MainLayout>
       <Banner />
       <div className="font-jost mt-3.5">
+      <Showcase/>
         <p className="font-jost font-semibold text-3xl ml-3.5 text-center mb-3">
           Shop Categories
         </p>
@@ -31,7 +34,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-    </div>
+    </MainLayout>
   );
 };
 
